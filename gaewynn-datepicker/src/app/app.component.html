@@ -1,0 +1,43 @@
+<div [formGroup]="gwDatePickerForm">
+  <gaewynn-datepicker [options]="gwDatePickerOptions">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ hint }}</mat-label>
+      <input matInput [formControl]="getCustomDateFormControl()" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </gaewynn-datepicker>
+
+  <br />
+
+  <gaewynn-datepicker [options]="gwDatePickerOptions">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ hint }}</mat-label>
+      <input matInput [formControl]="getCustomDate1FormControl()" [matDatepicker]="picker1">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+  </gaewynn-datepicker>
+
+  <br />
+
+  <button mat-button (click)="updateGWDatePickerDateFormat()">Update formats</button>
+
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <gaewynn-datepicker [options]="gwDatePickerOptions2">
+    <mat-form-field appearance="fill">
+      <mat-label>{{ hint2 }}</mat-label>
+      <input matInput [formControl]="getCustomDate2FormControl()" [matDatepicker]="picker2">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </gaewynn-datepicker>
+
+  <br />
+
+  <button mat-button (click)="updateGWDatePickerDateFormat2()">Update formats 2</button>
+</div>
