@@ -1,0 +1,43 @@
+{
+  "name": "gw-date-picker",
+  "version": "0.0.1",
+  "description": "A simple wrapper around the Material Angular Datepicker allowing to update the date format at runtime",
+  "author": "Arnaud Fischer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaewynn/angular.git"
+  },
+  "keywords": [
+    "angular",
+    "angular-material",
+    "datepicker"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "module": "fesm2015/gw-date-picker.mjs",
+  "es2020": "fesm2020/gw-date-picker.mjs",
+  "esm2020": "esm2020/gw-date-picker.mjs",
+  "fesm2020": "fesm2020/gw-date-picker.mjs",
+  "fesm2015": "fesm2015/gw-date-picker.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/gw-date-picker.mjs",
+      "es2020": "./fesm2020/gw-date-picker.mjs",
+      "es2015": "./fesm2015/gw-date-picker.mjs",
+      "node": "./fesm2015/gw-date-picker.mjs",
+      "default": "./fesm2020/gw-date-picker.mjs"
+    }
+  },
+  "sideEffects": false
+}
