@@ -1,6 +1,6 @@
 {
   "name": "gw-date-picker",
-  "version": "0.0.1",
+  "version": "15.0.0",
   "description": "A simple wrapper around the Material Angular Datepicker allowing to update the date format at runtime",
   "author": "Arnaud Fischer",
   "repository": {
@@ -9,8 +9,12 @@
   },
   "keywords": [
     "angular",
+    "angular15",
     "angular-material",
-    "datepicker"
+    "datepicker",
+    "date formats",
+    "calendar",
+    "moment"
   ],
   "license": "MIT",
   "peerDependencies": {
