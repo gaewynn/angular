@@ -17,7 +17,6 @@ class GWDatePickerComponent {
         this._locale = _locale;
         this._dateAdapter = _dateAdapter;
         this._gwDatePickerService = _gwDatePickerService;
-        this.id = GWDatePickerService.getUID();
         this._configurationSubscription = this._gwDatePickerService.configuration$.subscribe((configuration) => {
             this._configuration = configuration;
             //  During initialization, the MatDatePicker does not exist yet
@@ -68,10 +67,10 @@ class GWDatePickerComponent {
     }
 }
 GWDatePickerComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerComponent, deps: [{ token: i0.EnvironmentInjector }, { token: i0.NgZone }, { token: MAT_DATE_LOCALE }, { token: i1.DateAdapter }, { token: GWDatePickerService }], target: i0.ɵɵFactoryTarget.Component });
-GWDatePickerComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.0.4", type: GWDatePickerComponent, selector: "gaewynn-datepicker", inputs: { group: "group" }, queries: [{ propertyName: "datePicker", first: true, predicate: MatDatepicker, descendants: true }, { propertyName: "formControl", first: true, predicate: FormControlDirective, descendants: true }], ngImport: i0, template: "<span>{{ id }}</span>\r\n<ng-content></ng-content>" });
+GWDatePickerComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.0.4", type: GWDatePickerComponent, selector: "gaewynn-datepicker", inputs: { group: "group" }, queries: [{ propertyName: "datePicker", first: true, predicate: MatDatepicker, descendants: true }, { propertyName: "formControl", first: true, predicate: FormControlDirective, descendants: true }], ngImport: i0, template: "<ng-content></ng-content>" });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'gaewynn-datepicker', template: "<span>{{ id }}</span>\r\n<ng-content></ng-content>" }]
+            args: [{ selector: 'gaewynn-datepicker', template: "<ng-content></ng-content>" }]
         }], ctorParameters: function () {
         return [{ type: i0.EnvironmentInjector }, { type: i0.NgZone }, { type: undefined, decorators: [{
                         type: Inject,
@@ -141,16 +140,13 @@ class GWDatePickerService {
     init() {
         this.configuration$.next(this._datePickerConfiguration);
     }
-    updateIndividualsOptions(group, locale) {
+    updateFormats(group, locale) {
         for (let index = 0; index < this._datePickerConfiguration.initials.length; index++) {
             const element = this._datePickerConfiguration.initials[index];
             if (element.group === group)
                 element.locale = locale;
         }
         this.init();
-    }
-    static getUID() {
-        return Date.now().toString();
     }
 }
 GWDatePickerService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerService, deps: [{ token: GW_DATE_PICKER_CONFIGURATION }], target: i0.ɵɵFactoryTarget.Injectable });

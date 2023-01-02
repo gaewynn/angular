@@ -15,7 +15,7 @@ export class MockService {
     public currentLocaleGroup1: string;
     public currentLocaleGroup2: string;
 
-    constructor(private _gwDatePickerService: GWDatePickerService) {
+    constructor(private readonly _gwDatePickerService: GWDatePickerService) {
 
       this.currentLocaleGroup1 = "fr";
       this.currentLocaleGroup2 = "en";
@@ -42,14 +42,14 @@ export class MockService {
         this.currentLocaleGroup1 = this.currentLocaleGroup1 === "fr" ? "en" : "fr";
         const options = this.getGWDatepickerFormats(1);
         this.hintGroup1 = options.momentDateFormats.display.dateInput;
-        this._gwDatePickerService.updateIndividualsOptions("group1", this.currentLocaleGroup1);
+        this._gwDatePickerService.updateFormats("group1", this.currentLocaleGroup1);
 
       } else {
 
         this.currentLocaleGroup2 = this.currentLocaleGroup2 === "fr" ? "en" : "fr";
         const options = this.getGWDatepickerFormats(2);
         this.hintGroup2 = options.momentDateFormats.display.dateInput;
-        this._gwDatePickerService.updateIndividualsOptions("group2", this.currentLocaleGroup2);
+        this._gwDatePickerService.updateFormats("group2", this.currentLocaleGroup2);
       }
     }
 

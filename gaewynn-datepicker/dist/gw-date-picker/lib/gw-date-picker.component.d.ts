@@ -13,7 +13,6 @@ export declare class GWDatePickerComponent implements AfterViewInit, OnDestroy {
     datePicker: MatDatepicker<Date>;
     formControl: FormControlDirective;
     group: string;
-    id: string;
     private _calendarSubscription;
     private _configurationSubscription;
     private _zoneSubscription;

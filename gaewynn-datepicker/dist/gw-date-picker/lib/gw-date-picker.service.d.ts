@@ -7,8 +7,7 @@ export declare class GWDatePickerService {
     private _datePickerConfiguration;
     constructor(_configuration: GWDatePickerConfiguration);
     init(): void;
-    updateIndividualsOptions(group: string, locale: string): void;
-    static getUID(): string;
+    updateFormats(group: string, locale: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<GWDatePickerService, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<GWDatePickerService>;
 }

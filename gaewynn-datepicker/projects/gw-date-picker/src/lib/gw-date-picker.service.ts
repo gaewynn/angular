@@ -21,7 +21,7 @@ export class GWDatePickerService {
     this.configuration$.next(this._datePickerConfiguration);
   }
 
-  public updateIndividualsOptions(group: string, locale: string): void {
+  public updateFormats(group: string, locale: string): void {
 
     for (let index = 0; index < this._datePickerConfiguration.initials.length; index++) {
       
@@ -31,9 +31,5 @@ export class GWDatePickerService {
     }
 
     this.init();
-  }
-
-  public static getUID(): string {
-    return Date.now().toString();
   }
 }
