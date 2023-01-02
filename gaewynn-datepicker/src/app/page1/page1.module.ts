@@ -29,9 +29,6 @@ export const routes: Routes = [{
         MatInputModule,
 
         GWDatePickerModule
-    ],
-    providers: [
-        { provide: GW_DATE_PICKER_CONFIGURATION, useValue: GWDatePickersConfiguration }
     ]
 })
 export class Page1Module { }
