@@ -9,9 +9,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 
-import { GWDatePickerModule } from 'GWDatePicker';
+import { GWDatePickerModule, GW_DATE_PICKER_CONFIGURATION } from 'GWDatePicker';
 
 import { AppComponent } from './app.component';
+import { GWDatePickersConfiguration } from './configuration';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AppComponent } from './app.component';
     MomentDateAdapter,
 
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: GW_DATE_PICKER_CONFIGURATION, useValue: GWDatePickersConfiguration }
   ],
   bootstrap: [AppComponent]
 })

@@ -21,7 +21,7 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
 ## <a name="browser_support"></a> Browser support
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Opera |
 | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
-| IE11, Edge| lastest| lastest| lastest| lastest| lastest
+| IE11, Edge| lastest| lastest| lastest| lastest| lastest |
 ## <a name="features"></a> Features
 ### <a name="features_now"></a> Now:
  - **Angular 15** Support

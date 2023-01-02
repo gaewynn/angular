@@ -3,10 +3,10 @@
     <legend>2 datepickers sharing the same formats (Starting using FR formats - Currently in <b>'{{ getCurrentLanguage1() }}'</b>)</legend>
 
     <p>
-      <gaewynn-datepicker [options]="gwDatePickerOptions">
+      <gaewynn-datepicker [group]="'group1'">
         <mat-form-field appearance="fill">
           <mat-label>{{ hint }}</mat-label>
-          <input matInput [formControl]="getCustomDateFormControl()" [matDatepicker]="picker">
+          <input matInput [formControl]="customDateFormControl" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -14,10 +14,10 @@
     </p>
 
     <p>
-      <gaewynn-datepicker [options]="gwDatePickerOptions">
+      <gaewynn-datepicker [group]="'group1'">
         <mat-form-field appearance="fill">
           <mat-label>{{ hint }}</mat-label>
-          <input matInput [formControl]="getCustomDate1FormControl()" [matDatepicker]="picker1">
+          <input matInput [formControl]="customDate1FormControl" [matDatepicker]="picker1">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>
@@ -31,10 +31,10 @@
     <legend>1 datepicker dissociated from the 2 others (Starting using EN formats - Currently in <b>'{{ getCurrentLanguage2() }}'</b>)</legend>
 
     <p>
-      <gaewynn-datepicker [options]="gwDatePickerOptions2">
+      <gaewynn-datepicker [group]="'group2'">
         <mat-form-field appearance="fill">
           <mat-label>{{ hint2 }}</mat-label>
-          <input matInput [formControl]="getCustomDate2FormControl()" [matDatepicker]="picker2">
+          <input matInput [formControl]="customDate2FormControl" [matDatepicker]="picker2">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
