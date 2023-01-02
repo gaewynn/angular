@@ -2,17 +2,25 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 
 import { GWDatePickerModule, GW_DATE_PICKER_CONFIGURATION } from 'GWDatePicker';
 
 import { AppComponent } from './app.component';
 import { GWDatePickersConfiguration } from './configuration';
+import { MockService } from './mock.service';
+
+export const routes: Routes = [{
+  path: 'page1',
+  loadChildren: () => import('./page1/page1.module').then(m => m.Page1Module)
+}, {
+  path: 'page2',
+  loadChildren: () => import('./page2/page2.module').then(m => m.Page2Module)
+}];
 
 @NgModule({
   declarations: [
@@ -22,6 +30,7 @@ import { GWDatePickersConfiguration } from './configuration';
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(routes),
 
     MatDatepickerModule,
     MatFormFieldModule,
@@ -30,10 +39,7 @@ import { GWDatePickersConfiguration } from './configuration';
     GWDatePickerModule
   ],
   providers: [
-    MomentDateAdapter,
-
-    { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
-    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    MockService,
     { provide: GW_DATE_PICKER_CONFIGURATION, useValue: GWDatePickersConfiguration }
   ],
   bootstrap: [AppComponent]

@@ -32,4 +32,8 @@ export class GWDatePickerService {
 
     this.init();
   }
+
+  public static getUID(): string {
+    return Date.now().toString();
+  }
 }

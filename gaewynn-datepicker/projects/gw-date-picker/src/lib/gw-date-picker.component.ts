@@ -23,9 +23,10 @@ export class GWDatePickerComponent implements AfterViewInit, OnDestroy {
   @Input()
   public group!: string;
 
+  public id: string;
+
   private _calendarSubscription!: Subscription;
   private _configurationSubscription!: Subscription;
-  private _dateFormatsSubscription!: Subscription;
   private _zoneSubscription!: Subscription;
   private _configuration!: GWDatePickerConfiguration;
   private _formats!: IGWDatePickerFormats;
@@ -37,6 +38,7 @@ export class GWDatePickerComponent implements AfterViewInit, OnDestroy {
     private readonly _dateAdapter: DateAdapter<any>,
     private readonly _gwDatePickerService: GWDatePickerService) { 
 
+    this.id = GWDatePickerService.getUID();
     this._configurationSubscription = this._gwDatePickerService.configuration$.subscribe((configuration: GWDatePickerConfiguration) => {
 
       this._configuration = configuration;
@@ -72,7 +74,6 @@ export class GWDatePickerComponent implements AfterViewInit, OnDestroy {
 
     this._calendarSubscription.unsubscribe();
     this._configurationSubscription.unsubscribe();
-    this._dateFormatsSubscription.unsubscribe();
     this._zoneSubscription.unsubscribe();
   }
 

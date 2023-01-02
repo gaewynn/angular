@@ -2,11 +2,12 @@ import * as i0 from '@angular/core';
 import { Component, Inject, ContentChild, Input, InjectionToken, NgModule, Injectable } from '@angular/core';
 import { Subject } from 'rxjs/internal/Subject';
 import { FormControlDirective, ReactiveFormsModule } from '@angular/forms';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import * as i1 from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material/core';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import * as i1 from '@angular/material/core';
-import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { take } from 'rxjs';
 
 class GWDatePickerComponent {
@@ -16,6 +17,7 @@ class GWDatePickerComponent {
         this._locale = _locale;
         this._dateAdapter = _dateAdapter;
         this._gwDatePickerService = _gwDatePickerService;
+        this.id = GWDatePickerService.getUID();
         this._configurationSubscription = this._gwDatePickerService.configuration$.subscribe((configuration) => {
             this._configuration = configuration;
             //  During initialization, the MatDatePicker does not exist yet
@@ -41,7 +43,6 @@ class GWDatePickerComponent {
     ngOnDestroy() {
         this._calendarSubscription.unsubscribe();
         this._configurationSubscription.unsubscribe();
-        this._dateFormatsSubscription.unsubscribe();
         this._zoneSubscription.unsubscribe();
     }
     _apply() {
@@ -67,10 +68,10 @@ class GWDatePickerComponent {
     }
 }
 GWDatePickerComponent.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerComponent, deps: [{ token: i0.EnvironmentInjector }, { token: i0.NgZone }, { token: MAT_DATE_LOCALE }, { token: i1.DateAdapter }, { token: GWDatePickerService }], target: i0.ɵɵFactoryTarget.Component });
-GWDatePickerComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.0.4", type: GWDatePickerComponent, selector: "gaewynn-datepicker", inputs: { group: "group" }, queries: [{ propertyName: "datePicker", first: true, predicate: MatDatepicker, descendants: true }, { propertyName: "formControl", first: true, predicate: FormControlDirective, descendants: true }], ngImport: i0, template: "<ng-content></ng-content>" });
+GWDatePickerComponent.ɵcmp = i0.ɵɵngDeclareComponent({ minVersion: "14.0.0", version: "15.0.4", type: GWDatePickerComponent, selector: "gaewynn-datepicker", inputs: { group: "group" }, queries: [{ propertyName: "datePicker", first: true, predicate: MatDatepicker, descendants: true }, { propertyName: "formControl", first: true, predicate: FormControlDirective, descendants: true }], ngImport: i0, template: "<span>{{ id }}</span>\r\n<ng-content></ng-content>" });
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerComponent, decorators: [{
             type: Component,
-            args: [{ selector: 'gaewynn-datepicker', template: "<ng-content></ng-content>" }]
+            args: [{ selector: 'gaewynn-datepicker', template: "<span>{{ id }}</span>\r\n<ng-content></ng-content>" }]
         }], ctorParameters: function () { return [{ type: i0.EnvironmentInjector }, { type: i0.NgZone }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [MAT_DATE_LOCALE]
@@ -98,7 +99,11 @@ GWDatePickerModule.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", vers
         MatDatepickerModule,
         MatFormFieldModule,
         MatInputModule], exports: [GWDatePickerComponent] });
-GWDatePickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerModule, imports: [ReactiveFormsModule,
+GWDatePickerModule.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerModule, providers: [
+        MomentDateAdapter,
+        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
+        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    ], imports: [ReactiveFormsModule,
         MatDatepickerModule,
         MatFormFieldModule,
         MatInputModule] });
@@ -116,6 +121,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.4", ngImpor
                     ],
                     exports: [
                         GWDatePickerComponent
+                    ],
+                    providers: [
+                        MomentDateAdapter,
+                        { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
+                        { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
                     ]
                 }]
         }] });
@@ -136,6 +146,9 @@ class GWDatePickerService {
                 element.locale = locale;
         }
         this.init();
+    }
+    static getUID() {
+        return Date.now().toString();
     }
 }
 GWDatePickerService.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "15.0.4", ngImport: i0, type: GWDatePickerService, deps: [{ token: GW_DATE_PICKER_CONFIGURATION }], target: i0.ɵɵFactoryTarget.Injectable });
