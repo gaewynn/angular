@@ -5,8 +5,8 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Subscription, take } from 'rxjs';
 
-import { GWDatePickerConfiguration, IGWDatePickerFormats } from './gw-date-picker.module';
-import { GWDatePickerService } from './gw-date-picker.service';
+import { GWDatePickerConfiguration, IGWDatePickerFormats } from '../gw-date-picker.service';
+import { GWDatePickerService } from '../gw-date-picker.service';
 
 @Component({
   selector: 'gaewynn-datepicker',

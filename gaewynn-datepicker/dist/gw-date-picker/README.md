@@ -1,4 +1,5 @@
 
+
 An Angular Material Component wrapping the Angular Material Datepicker and allowing to update the date formats at runtime (see https://github.com/angular/components/issues/8355)
 <h1 align="center">GWDatePicker</h1>
 
@@ -12,26 +13,32 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
     - [What's next?](#features_whatsnext)
  - [Demo](#demo)
  - [Installation](#installation)
+ - [What's in?](#whatsin)
  - [Usage](#usage)
+    - [DatePicker](#usage_datepicker)
+    - [DateRangePicker](#usage_daterangepicker)
  - [Versioning](#versioning)
  - [Creator](#creator)
  - [Ask Me](#ask_me)
  - [Credits](#credits)
 	 -  [License](#license)
 ## <a name="browser_support"></a> Browser support
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Opera |
-| --------- | --------- | --------- | --------- | --------- | --------- | --------- |
-| IE11, Edge| lastest| lastest| lastest| lastest| lastest |
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) IE / Edge|[<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Firefox| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Chrome |[<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Safari| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/) Opera|
+|--|--|--|--|--|
+|IE11, Edge|latest|latest|latest|latest|
+
 ## <a name="features"></a> Features
 ### <a name="features_now"></a> Now:
  - **Angular 15** Support
  - All features from the native [Angular Material DatePicker](https://material.angular.io/components/datepicker/overview).....**and one more**
  - Update your DatePicker date formats at runtime (**including the calendar popup labels**)
  - Support **only MomentDateAdapter**
+ - Support DateRangePicker
 ### <a name="features_whatsnext"></a> What's next?
 * If you find it useful, [just ask](https://github.com/gaewynn/angular/issues) ;)
 ## <a name="demo"></a> Demo
-...in progress...
+[GWDatePicker demo](https://stackblitz.com/edit/geawynn-date-picker)
 ## <a name="installation"></a> Installation
 gw-date-picker is available via **npm** and **yarn**
 
@@ -44,119 +51,189 @@ Using yarn:
 Using angular-cli:
 
     $ ng add gw-date-picker
-## <a name="usage"></a> Usage
-**GWDatePicker** is only a wrapper around the Angular Material Datepicker, so just wrap your Angular Material Datepicker inside the \<gaewynn-datepicker\> and give your formats options,
 
-1. Update your AppModule (import "MatDatepickermodule, MatFormModule, MatInputModule and GWDatePickerModule) and add some providers
+## <a name="whatsin"></a> What's in?
+|Member|Description|
+|--|--|
+|GWDatePickerModule|The module handling DatePickers. To import in each module using the component|
+|GWDateRangePickerModule|The module handling DateRangePickers. To import in each module using the component|
+|GWDatePickerService|A service allowing to update the date pickers formats|
+|GW_DATE_PICKER_CONFIGURATION|A token providing your formats configuration|
+
+GW_DATE_PICKER_CONFIGURATION consists of two properties:
+
+ - **initials**: represents a collection of links between a datepicker (or date range picker) and the locale it will use
 ```typescript
-import { NgModule } from  '@angular/core';
-import { BrowserModule } from  '@angular/platform-browser';
-import { BrowserAnimationsModule } from  '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from  '@angular/forms';
-        
-import { MatFormFieldModule } from  '@angular/material/form-field';
-import { MatInputModule } from  '@angular/material/input';
-import { MatDatepickerModule } from  '@angular/material/datepicker';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from  '@angular/material/core';
-import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from  '@angular/material-moment-adapter';
-        
-import { GWDatePickerModule } from  'GWDatePicker';
-        
-import { AppComponent } from  './app.component';
+[
+	// All components with a group binding set to "group1" will be initialized using the "fr" format define in the "momentDateFormats" properties
+	{ group: "group1", locale: "fr" },
+
+	// All components with a group binding set to "group2" will be initialized using the "en" format define in the "momentDateFormats" properties
+	{ group: "group2", locale: "en" }
+]
+```
+ - **formats**: represents the formats to use for each locale of your application
+```typescript
+[
+	//	Formats that will be used for the "fr" locale
+	{
+		locale:  "fr",
+		momentDateFormats: {
+			parse: {
+				dateInput:  "DD.MM.YYYY",
+			},
+			display: {
+				dateInput:  "DD.MM.YYYY",
+				monthYearLabel:  "MMM.YYYY",
+				dateA11yLabel:  "DD.MM.YYYY",
+				monthYearA11yLabel:  "MMM.YYYY",
+			}
+		}
+	}, 
+	//	Formats that will be used for the "en" locale
+	{
+		locale:  "en",
+		momentDateFormats: {
+			parse: {
+				dateInput:  "YYYY-MM-DD",
+			},
+			display: {
+				dateInput:  "YYYY-MM-DD",
+				monthYearLabel:  "MMM/YYYY",
+				dateA11yLabel:  "YYYY-MM-DD",
+				monthYearA11yLabel:  "MMM/YYYY",
+			}
+		}
+	}
+]
+```
+
+An example of a whole configuration will then be as follow:
+```typescript
+export  const  GWDatePickersConfiguration: GWDatePickerConfiguration = {
+	initials: [{ group:  "group1", locale:  "fr" }, { group:  "group2", locale:  "en" }],
+	formats: [{
+		locale:  "fr",
+		momentDateFormats: {
+			parse: {
+				dateInput:  "DD.MM.YYYY",
+			},
+			display: {
+				dateInput:  "DD.MM.YYYY",
+				monthYearLabel:  "MMM.YYYY",
+				dateA11yLabel:  "DD.MM.YYYY",
+				monthYearA11yLabel:  "MMM.YYYY",
+			}
+		}
+	}, {
+		locale:  "en",
+		momentDateFormats: {
+			parse: {
+				dateInput:  "YYYY-MM-DD",
+			},
+			display: {
+				dateInput:  "YYYY-MM-DD",
+				monthYearLabel:  "MMM/YYYY",
+				dateA11yLabel:  "YYYY-MM-DD",
+				monthYearA11yLabel:  "MMM/YYYY",
+			}
+		}
+	}]
+};
+```
+
+## <a name="usage"></a> Usage
+**GWDatePicker** is only a wrapper around the Angular Material Datepicker, so just wrap your Angular Material Datepicker inside the \<gaewynn-datepicker\>.
+
+**It relies on ReactiveForms, so needs to be included in a FormGroup**
+
+1. Inject the GWDatePickerModule (and/or the GWDateRangePickerModule) in each modules using the component and define a configuration for your datepickers (see [What's in?](#whatsin)). This configuration will be provided using the  **GW_DATE_PICKER_CONFIGURATION** token in your AppModule
+```typescript
+//...  
+import { GWDatePickerModule, GWDateRangePickerModule, GW_DATE_PICKER_CONFIGURATION } from  'GWDatePicker';
         
 @NgModule({      
 	imports: [
-		//...     
-		BrowserModule,
-		BrowserAnimationsModule,
-		ReactiveFormsModule,
-        
-		MatDatepickerModule,
-		MatFormFieldModule,
-		MatInputModule,
-				
-		GWDatePickerModule
+		//...     		
+		GWDatePickerModule,
+		GWDateRangePickerModule
 	],
 	providers: [
-		MomentDateAdapter,
-		{ provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS] },
-		{ provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS }
+		// ...
+		//	GWDatePickersConfiguration is the configuration as described
+		//	You can use "useFactory" or "useClass" to provide the configuration
+		{ provide: GW_DATE_PICKER_CONFIGURATION, useValue: GWDatePickersConfiguration }
 	]
 })
 export class AppModule { }
 ```
-2. Add the component in your template
-
+2. Add the  \<gaewynn-datepicker> and/or the \<gaewynn-date-range-picker> to your template
 ```html
 <div [formGroup]="gwDatePickerForm">
-	<gaewynn-datepicker [options]="gwDatePickerOptions">
+	<!-- the [group] binding indicate which format will be used for this datepicker (see "What's in?" -->
+	<gaewynn-datepicker [group]="'group1'">
 		<mat-form-field appearance="fill">
-			<mat-label>{{ hint }}</mat-label>
-			<input  matInput [formControl]="getCustomDateFormControl()" [matDatepicker]="picker">
+			<mat-label>{{ Your hint }}</mat-label>
+			<input  matInput [formControl]="customDateFormControl" [matDatepicker]="picker">
 			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 			<mat-datepicker #picker></mat-datepicker>
 		</mat-form-field>
 	</gaewynn-datepicker>
 
-	<button mat-button (click)="updateGWDatePickerDateFormats()">Update formats</button>
+	<!-- For a DateRangePicker -->
+	<gaewynn-date-range-picker  [group]="'group1'">
+		<mat-form-field  appearance="fill">
+			<mat-label>{{ mockService.getRangePlaceholder(1) }}</mat-label>
+			<mat-date-range-input  [rangePicker]="rangePicker1">
+				<input  matStartDate  [formControl]="customRangeDateFromFormControl1"  placeholder="Start date">
+				<input  matEndDate  [formControl]="customRangeDateToFormControl1"  placeholder="End date">
+			</mat-date-range-input>
+			<mat-hint>{{ mockService.hintGroup1 }} – {{ mockService.hintGroup1 }}</mat-hint>
+			<mat-datepicker-toggle  matIconSuffix  [for]="rangePicker1"></mat-datepicker-toggle>
+			<mat-date-range-picker  #rangePicker1></mat-date-range-picker>
+		</mat-form-field>
+	</gaewynn-date-range-picker>
 </div>
 ```
-3. Set your options
+
+3. Inject the **GWDatePickerService** in each component using the \<gaewynn-datepicker> (or the \<gaewynn-date-range-picker>) component and call the function "init()" to initialize all datepickers with their initials formats
 ```typescript
 @Component({
 	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.scss']
+	templateUrl: './app.component.html'
 })
-export class AppComponent implements  AfterViewInit {
+export class AppComponent implements OnInit {
 
-	public gwDatePickerForm: FormGroup = this._formBuilder.group({ customDate: [''] });
-	public gwDatePickerOptions: Subject<IGWDatePickerOptions> = new Subject<IGWDatePickerOptions>();
-	public hint = '';
-	
-	private _currentLocale = "fr";
-	
-	constructor(private  readonly  _formBuilder: FormBuilder) {
-		const options = this._getGWDatepickerOptions(this._currentLocale);
-		this.hint = options.momentDateFormats.display.dateInput;
-	}
+	constructor(private readonly _gwDatePickerService: GWDatePickerService) { }
 
-	public  ngAfterViewInit(): void {
-
-		//	Initialize our picker with initial options
-		this.gwDatePickerOptions.next(this._getGWDatepickerOptions(this._currentLocale));
-	}
-
-	public  getCustomDateFormControl(): FormControl {
-		return  this.gwDatePickerForm.controls['customDate'] as  FormControl;
-	}
-	
-	public  updateGWDatePickerDateFormats2(): void {
-		this._currentLocale = this._currentLocale === "fr" ? "en" : "fr";
-		const  options = this._getGWDatepickerOptions(this._currentLocale);
-		this.gwDatePickerOptions.next(options);
-	}
-
-	private  _getGWDatepickerOptions(language: string): IGWDatePickerOptions {
-
-		//	Use your custom logic to switch among your date formats
-		return {
-			locale: language,
-			momentDateFormats: {
-				parse: {
-					dateInput: language === "en" ? "YYYY-MM-DD" : "DD.MM.YYYY",
-				},
-				display: {
-					dateInput: language === "en" ? "YYYY-MM-DD" : "DD.MM.YYYY",
-					monthYearLabel: language === "en" ? "MMMM YY" : "MMM YYYY",
-					dateA11yLabel: language === "en" ? "YYYY-MM-DD" : "DD.MM.YYYY",
-					monthYearA11yLabel: language === "en" ? "MMMM YY" : "MMM YYYY",
-				}
-			}
-		};
+	public ngOnInit(): void {
+		this._gwDatePickerService.init();
 	}
 }
 ```
+4. Trigger the update of your format whenever you want
+```typescript
+@Component({
+	selector: 'app-root',
+	templateUrl: './app.component.html'
+})
+export class AppComponent implements OnInit {
+
+	constructor(private readonly _gwDatePickerService: GWDatePickerService) { }
+
+	public ngOnInit(): void {
+		this._gwDatePickerService.init();
+	}
+
+	public updateFormats(): void {
+
+		// This will use the formats linked to the "en" locale in your 
+		// GW_DATE_PICKER_CONFIGURATION on all datepickers binded to "group1"
+		this._gwDatePickerService.updateFormats("group1", "en");
+	}
+}
+```
+
 ## <a name="creator"></a> Versioning
 gw-date-picker will be maintained under the Semantic Versioning guidelines. Releases will be numbered with the following format:
 

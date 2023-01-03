@@ -15,6 +15,8 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
  - [Installation](#installation)
  - [What's in?](#whatsin)
  - [Usage](#usage)
+    - [DatePicker](#usage_datepicker)
+    - [DateRangePicker](#usage_daterangepicker)
  - [Versioning](#versioning)
  - [Creator](#creator)
  - [Ask Me](#ask_me)
@@ -32,10 +34,11 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
  - All features from the native [Angular Material DatePicker](https://material.angular.io/components/datepicker/overview).....**and one more**
  - Update your DatePicker date formats at runtime (**including the calendar popup labels**)
  - Support **only MomentDateAdapter**
+ - Support DateRangePicker
 ### <a name="features_whatsnext"></a> What's next?
 * If you find it useful, [just ask](https://github.com/gaewynn/angular/issues) ;)
 ## <a name="demo"></a> Demo
-...in progress...
+[GWDatePicker demo](https://stackblitz.com/edit/geawynn-date-picker)
 ## <a name="installation"></a> Installation
 gw-date-picker is available via **npm** and **yarn**
 
@@ -52,13 +55,14 @@ Using angular-cli:
 ## <a name="whatsin"></a> What's in?
 |Member|Description|
 |--|--|
-|GWDatePickerModule|The module itself. To import in each module using the component|
+|GWDatePickerModule|The module handling DatePickers. To import in each module using the component|
+|GWDateRangePickerModule|The module handling DateRangePickers. To import in each module using the component|
 |GWDatePickerService|A service allowing to update the date pickers formats|
 |GW_DATE_PICKER_CONFIGURATION|A token providing your formats configuration|
 
 GW_DATE_PICKER_CONFIGURATION consists of two properties:
 
- - **initials**: represents a collection of links between a datepicker and the locale it will use
+ - **initials**: represents a collection of links between a datepicker (or date range picker) and the locale it will use
 ```typescript
 [
 	// All components with a group binding set to "group1" will be initialized using the "fr" format define in the "momentDateFormats" properties
@@ -143,15 +147,16 @@ export  const  GWDatePickersConfiguration: GWDatePickerConfiguration = {
 
 **It relies on ReactiveForms, so needs to be included in a FormGroup**
 
-1. Inject the GWDatePickerModule in each modules using the component and define a configuration for your datepickers (see [What's in?](#whatsin)). This configuration will be provided using the  **GW_DATE_PICKER_CONFIGURATION** token in your AppModule
+1. Inject the GWDatePickerModule (and/or the GWDateRangePickerModule) in each modules using the component and define a configuration for your datepickers (see [What's in?](#whatsin)). This configuration will be provided using the  **GW_DATE_PICKER_CONFIGURATION** token in your AppModule
 ```typescript
 //...  
-import { GWDatePickerModule, GW_DATE_PICKER_CONFIGURATION } from  'GWDatePicker';
+import { GWDatePickerModule, GWDateRangePickerModule, GW_DATE_PICKER_CONFIGURATION } from  'GWDatePicker';
         
 @NgModule({      
 	imports: [
 		//...     		
-		GWDatePickerModule
+		GWDatePickerModule,
+		GWDateRangePickerModule
 	],
 	providers: [
 		// ...
@@ -162,7 +167,7 @@ import { GWDatePickerModule, GW_DATE_PICKER_CONFIGURATION } from  'GWDatePicker'
 })
 export class AppModule { }
 ```
-2. Add the  \<gaewynn-datepicker> to your template
+2. Add the  \<gaewynn-datepicker> and/or the \<gaewynn-date-range-picker> to your template
 ```html
 <div [formGroup]="gwDatePickerForm">
 	<!-- the [group] binding indicate which format will be used for this datepicker (see "What's in?" -->
@@ -174,10 +179,24 @@ export class AppModule { }
 			<mat-datepicker #picker></mat-datepicker>
 		</mat-form-field>
 	</gaewynn-datepicker>
+
+	<!-- For a DateRangePicker -->
+	<gaewynn-date-range-picker  [group]="'group1'">
+		<mat-form-field  appearance="fill">
+			<mat-label>{{ mockService.getRangePlaceholder(1) }}</mat-label>
+			<mat-date-range-input  [rangePicker]="rangePicker1">
+				<input  matStartDate  [formControl]="customRangeDateFromFormControl1"  placeholder="Start date">
+				<input  matEndDate  [formControl]="customRangeDateToFormControl1"  placeholder="End date">
+			</mat-date-range-input>
+			<mat-hint>{{ mockService.hintGroup1 }} – {{ mockService.hintGroup1 }}</mat-hint>
+			<mat-datepicker-toggle  matIconSuffix  [for]="rangePicker1"></mat-datepicker-toggle>
+			<mat-date-range-picker  #rangePicker1></mat-date-range-picker>
+		</mat-form-field>
+	</gaewynn-date-range-picker>
 </div>
 ```
 
-3. Inject the **GWDatePickerService** in each component using the \<gaewynn-datepicker> component and call the function "init()" to initialize all datepickers with their initials formats
+3. Inject the **GWDatePickerService** in each component using the \<gaewynn-datepicker> (or the \<gaewynn-date-range-picker>) component and call the function "init()" to initialize all datepickers with their initials formats
 ```typescript
 @Component({
 	selector: 'app-root',

@@ -1,5 +1,5 @@
-<fieldset>
-    <legend>PAGE2 COMPONENT</legend>
+<fieldset style="width: 40%; display: inline-block; background-color: lightskyblue;">
+    <legend><b>PAGE2 COMPONENT (Lazy loaded)</b></legend>
   
     <div [formGroup]="gwDatePickerForm">
       <fieldset style="margin-bottom: 20px;">
@@ -8,7 +8,7 @@
         <p>
           <gaewynn-datepicker [group]="'group1'">
             <mat-form-field appearance="fill">
-              <mat-label>{{ mockService.hintGroup1 }}</mat-label>
+              <mat-label>{{ mockService.getPlaceholder(1) }}</mat-label>
               <input matInput [formControl]="customDateFormControl" [matDatepicker]="picker">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -19,7 +19,7 @@
         <p>
           <gaewynn-datepicker [group]="'group1'">
             <mat-form-field appearance="fill">
-              <mat-label>{{ mockService.hintGroup1 }}</mat-label>
+              <mat-label>{{ mockService.getPlaceholder(1) }}</mat-label>
               <input matInput [formControl]="customDate1FormControl" [matDatepicker]="picker1">
               <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
@@ -36,7 +36,7 @@
         <p>
           <gaewynn-datepicker [group]="'group2'">
             <mat-form-field appearance="fill">
-              <mat-label>{{ mockService.hintGroup2 }}</mat-label>
+              <mat-label>{{ mockService.getPlaceholder(2) }}</mat-label>
               <input matInput [formControl]="customDate2FormControl" [matDatepicker]="picker2">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>

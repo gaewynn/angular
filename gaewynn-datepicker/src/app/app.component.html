@@ -3,18 +3,19 @@
   <button mat-button (click)="goToPage(2)">Navigate to page 2</button>
 </p>
 
-<fieldset>
-  <legend>APP COMPONENT</legend>
+<fieldset style="width: 40%; display: inline-block; margin-right: 10%; background-color: lightyellow;">
+  <legend><b>APP COMPONENT</b></legend>
 
   <div [formGroup]="gwDatePickerForm">
     <fieldset style="margin-bottom: 20px;">
-      <legend>2 datepickers sharing the same formats ['group1'] (Starting using FR formats - Currently in <b>'{{ mockService.getCurrentLanguage(1) }}'</b>)</legend>
+      <legend>Datepickers sharing the same formats ['group1'] (Starting using FR formats - Currently in <b>'{{ mockService.getCurrentLanguage(1) }}'</b>)</legend>
   
       <p>
         <gaewynn-datepicker [group]="'group1'">
           <mat-form-field appearance="fill">
-            <mat-label>{{ mockService.hintGroup1 }}</mat-label>
+            <mat-label>{{ mockService.getPlaceholder(1) }}</mat-label>
             <input matInput [formControl]="customDateFormControl" [matDatepicker]="picker">
+            <mat-hint>{{ mockService.hintGroup1 }}</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -24,14 +25,30 @@
       <p>
         <gaewynn-datepicker [group]="'group1'">
           <mat-form-field appearance="fill">
-            <mat-label>{{ mockService.hintGroup1 }}</mat-label>
+            <mat-label>{{ mockService.getPlaceholder(1) }}</mat-label>
             <input matInput [formControl]="customDate1FormControl" [matDatepicker]="picker1">
+            <mat-hint>{{ mockService.hintGroup1 }}</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
         </gaewynn-datepicker>
       </p>
     
+      <p>
+        <gaewynn-date-range-picker [group]="'group1'">
+          <mat-form-field appearance="fill">
+            <mat-label>{{ mockService.getRangePlaceholder(1) }}</mat-label>
+            <mat-date-range-input [rangePicker]="rangePicker1">
+              <input matStartDate [formControl]="customRangeDateFromFormControl1" placeholder="Start date">
+              <input matEndDate [formControl]="customRangeDateToFormControl1" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>{{ mockService.hintGroup1 }} – {{ mockService.hintGroup1 }}</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="rangePicker1"></mat-datepicker-toggle>
+            <mat-date-range-picker #rangePicker1></mat-date-range-picker>
+          </mat-form-field>
+        </gaewynn-date-range-picker>
+      </p>
+
       <button mat-button (click)="mockService.updateGWDatePickerDateFormats(1)">Switch to <b>'{{ mockService.getSwitchToLabel(1) }}'</b> formats</button>
     </fieldset>
   
@@ -41,8 +58,9 @@
       <p>
         <gaewynn-datepicker [group]="'group2'">
           <mat-form-field appearance="fill">
-            <mat-label>{{ mockService.hintGroup2 }}</mat-label>
+            <mat-label>{{ mockService.getPlaceholder(2) }}</mat-label>
             <input matInput [formControl]="customDate2FormControl" [matDatepicker]="picker2">
+            <mat-hint>{{ mockService.hintGroup2 }}</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>

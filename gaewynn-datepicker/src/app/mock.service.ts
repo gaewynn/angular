@@ -63,4 +63,18 @@ export class MockService {
         ? this.currentLocaleGroup1 === "fr" ? "en" : "fr"
         : this.currentLocaleGroup2 === "fr" ? "en" : "fr";
     }
+
+    public getPlaceholder(groupNumber: number): string {
+      
+      return groupNumber === 1
+        ? this.currentLocaleGroup1 === "fr" ? "Choisissez une date" : "Choose a date"
+        : this.currentLocaleGroup2 === "fr" ? "Choisissez une date" : "Choose a date"
+    }
+
+    public getRangePlaceholder(groupNumber: number): string {
+      
+      return groupNumber === 1
+        ? this.currentLocaleGroup1 === "fr" ? "Choisissez un intervalle de dates" : "Enter a date range"
+        : this.currentLocaleGroup2 === "fr" ? "Choisissez un intervalle de dates" : "Enter a date range"
+    }
 }

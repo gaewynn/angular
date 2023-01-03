@@ -1,8 +1,31 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 import { Subject } from 'rxjs/internal/Subject';
 
-import { GWDatePickerConfiguration, GW_DATE_PICKER_CONFIGURATION } from './gw-date-picker.module';
+export const GW_DATE_PICKER_CONFIGURATION = new InjectionToken<GWDatePickerConfiguration>(
+  'GW_DATE_PICKER_CONFIGURATION',
+  undefined
+);
+
+export interface IGWDatePickerFormats {
+  locale: string;
+  momentDateFormats: { 
+      parse: { dateInput: string }, 
+      display: { 
+          dateInput: string;
+          monthYearLabel: string;
+          dateA11yLabel: string;
+          monthYearA11yLabel: string;
+      }
+  };
+}
+
+export class GWDatePickerConfiguration {
+
+  constructor(
+    public initials: { group: string, locale: string }[],
+    public formats: IGWDatePickerFormats[]) { }
+}
 
 @Injectable({
   providedIn: 'root'
