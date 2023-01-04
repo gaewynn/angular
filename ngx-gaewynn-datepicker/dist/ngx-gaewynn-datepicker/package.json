@@ -1,0 +1,47 @@
+{
+  "name": "ngx-gaewynn-datepicker",
+  "version": "1.0.0",
+  "description": "A simple wrapper around the Material Angular Datepicker allowing to update the date format at runtime",
+  "author": "Arnaud Fischer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaewynn/angular.git"
+  },
+  "keywords": [
+    "angular",
+    "angular15",
+    "angular-material",
+    "datepicker",
+    "date formats",
+    "calendar",
+    "moment"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "module": "fesm2015/ngx-gaewynn-datepicker.mjs",
+  "es2020": "fesm2020/ngx-gaewynn-datepicker.mjs",
+  "esm2020": "esm2020/ngx-gaewynn-datepicker.mjs",
+  "fesm2020": "fesm2020/ngx-gaewynn-datepicker.mjs",
+  "fesm2015": "fesm2015/ngx-gaewynn-datepicker.mjs",
+  "typings": "index.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./index.d.ts",
+      "esm2020": "./esm2020/ngx-gaewynn-datepicker.mjs",
+      "es2020": "./fesm2020/ngx-gaewynn-datepicker.mjs",
+      "es2015": "./fesm2015/ngx-gaewynn-datepicker.mjs",
+      "node": "./fesm2015/ngx-gaewynn-datepicker.mjs",
+      "default": "./fesm2020/ngx-gaewynn-datepicker.mjs"
+    }
+  },
+  "sideEffects": false
+}

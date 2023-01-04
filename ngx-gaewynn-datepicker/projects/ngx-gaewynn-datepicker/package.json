@@ -1,0 +1,27 @@
+{
+  "name": "ngx-gaewynn-datepicker",
+  "version": "1.0.0",
+  "description": "A simple wrapper around the Material Angular Datepicker allowing to update the date format at runtime",
+  "author": "Arnaud Fischer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gaewynn/angular.git"
+  },
+  "keywords": [
+    "angular",
+    "angular15",
+    "angular-material",
+    "datepicker",
+    "date formats",
+    "calendar",
+    "moment"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^15.0.0",
+    "@angular/core": "^15.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
