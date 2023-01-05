@@ -35,14 +35,14 @@ export class MockService {
         this.currentLocaleGroup1 = this.currentLocaleGroup1 === "fr" ? "en" : "fr";
         const options = this._getNgxGaewynnDatePickerFormats(1);
         this.hintGroup1 = options.momentDateFormats.display.dateInput;
-        this._ngxGaewynnDatePickerService.updateFormats("group1", this.currentLocaleGroup1);
+        this._ngxGaewynnDatePickerService.updateFormat(this.currentLocaleGroup1 === "fr" ? "format-1" : "format-2", "group1");
 
       } else {
 
         this.currentLocaleGroup2 = this.currentLocaleGroup2 === "fr" ? "en" : "fr";
         const options = this._getNgxGaewynnDatePickerFormats(2);
         this.hintGroup2 = options.momentDateFormats.display.dateInput;
-        this._ngxGaewynnDatePickerService.updateFormats("group2", this.currentLocaleGroup2);
+        this._ngxGaewynnDatePickerService.updateFormat(this.currentLocaleGroup2 === "fr" ? "format-1" : "format-2", "group2");
       }
     }
 
@@ -74,7 +74,7 @@ export class MockService {
     private _getNgxGaewynnDatePickerFormats(groupNumber: number): INgxGaewynnDatePickerFormats {
 
       return groupNumber === 1
-          ? GaewynnDatePickerConfiguration.formats.filter(e => e.locale === this.currentLocaleGroup1)[0]
-          : GaewynnDatePickerConfiguration.formats.filter(e => e.locale === this.currentLocaleGroup2)[0]
+          ? GaewynnDatePickerConfiguration.formats.filter(e => e.format === (this.currentLocaleGroup1 === "fr" ? "format-1" : "format-2"))[0]
+          : GaewynnDatePickerConfiguration.formats.filter(e => e.format === (this.currentLocaleGroup2 === "fr" ? "format-1" : "format-2"))[0]
   }
 }

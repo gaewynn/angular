@@ -1,8 +1,9 @@
-import { NgxGaewynnDatePickerConfiguration } from "NgxGaewynnDatePicker";
+import { INgxGaewynnDatePickerConfiguration } from "NgxGaewynnDatePicker";
 
-export const GaewynnDatePickerConfiguration: NgxGaewynnDatePickerConfiguration = {
-    initials: [{ group: "group1", locale: "fr" }, { group: "group2", locale: "en" }],
+export const GaewynnDatePickerConfiguration: INgxGaewynnDatePickerConfiguration = {
+    initials: [{ group: "group1", format: "format-1" }, { group: "group2", format: "format-2" }],
     formats: [{
+        format: "format-1",
         locale: "fr",
         momentDateFormats: {
             parse: {
@@ -16,6 +17,7 @@ export const GaewynnDatePickerConfiguration: NgxGaewynnDatePickerConfiguration =
             }
         }
     }, {
+        format: "format-2",
         locale: "en",
         momentDateFormats: {
             parse: {

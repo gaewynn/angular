@@ -5,7 +5,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MatDatepicker } from '@angular/material/datepicker';
 import { Subscription, take } from 'rxjs';
 
-import { NgxGaewynnDatePickerConfiguration, NgxGaewynnDatePickerService, INgxGaewynnDatePickerFormats } from '../ngx-gaewynn-datepicker.service';
+import { INgxGaewynnDatePickerConfiguration, NgxGaewynnDatePickerService, INgxGaewynnDatePickerFormats } from '../ngx-gaewynn-datepicker.service';
 
 @Component({
   selector: 'ngx-gaewynn-datepicker',
@@ -25,7 +25,7 @@ export class NgxGaewynnDatePickerComponent implements AfterViewInit, OnDestroy {
   private _calendarSubscription!: Subscription;
   private _configurationSubscription!: Subscription;
   private _zoneSubscription!: Subscription;
-  private _configuration!: NgxGaewynnDatePickerConfiguration;
+  private _configuration!: INgxGaewynnDatePickerConfiguration;
   private _formats!: INgxGaewynnDatePickerFormats;
 
   constructor(
@@ -35,7 +35,7 @@ export class NgxGaewynnDatePickerComponent implements AfterViewInit, OnDestroy {
     private readonly _dateAdapter: DateAdapter<any>,
     private readonly _ngxGaewynnDatePickerService: NgxGaewynnDatePickerService) { 
 
-    this._configurationSubscription = this._ngxGaewynnDatePickerService.configuration$.subscribe((configuration: NgxGaewynnDatePickerConfiguration) => {
+    this._configurationSubscription = this._ngxGaewynnDatePickerService.configuration$.subscribe((configuration: INgxGaewynnDatePickerConfiguration) => {
 
       this._configuration = configuration;
 
@@ -80,7 +80,7 @@ export class NgxGaewynnDatePickerComponent implements AfterViewInit, OnDestroy {
       const link = this._configuration.initials[index];
       if (this.group === link.group) {
 
-        this._formats = this._configuration.formats.filter(e => e.locale === this._configuration.initials.filter(value => value.group === this.group)[0].locale)[0];;
+        this._formats = this._configuration.formats.filter(e => e.format === this._configuration.initials.filter(value => value.group === this.group)[0].format)[0];;
         this._updateInputDateFormats();
       }
     }

@@ -43,7 +43,7 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
 ### <a name="features_whatsnext"></a> What's next?
 * If you find it useful, [just ask](https://github.com/gaewynn/angular/issues) ;)
 ## <a name="demo"></a> Demo
-[NgxGaewynnDatePicker demo](https://stackblitz.com/edit/ngx-geawynn-datepicker)
+[NgxGaewynnDatePicker demo](https://stackblitz.com/edit/ngx-geawynn-datepicker-2-0-x)
 ## <a name="installation"></a> Installation
 ngx-gaewynn-datepicker is available via **npm** and **yarn**
 
@@ -70,43 +70,45 @@ NGX_GAEWYNN_DATEPICKER_CONFIGURATION consists of two properties:
  - **initials**: represents a collection of links between a datepicker (or date range picker) and the locale it will use
 ```typescript
 [
-	// All components with a group binding set to "group1" will be initialized using the "fr" format define in the "momentDateFormats" properties
-	{ group: "group1", locale: "fr" },
+	// All components with a group binding set to "group1" will be initialized using the format name "format-1" defined in the NGX_GAEWYNN_DATEPICKER_CONFIGURATION
+	{ group: "group1", format: "format-1" },
 
-	// All components with a group binding set to "group2" will be initialized using the "en" format define in the "momentDateFormats" properties
-	{ group: "group2", locale: "en" }
+	// All components with a group binding set to "group2" will be initialized using the format name "format-2" defined in the NGX_GAEWYNN_DATEPICKER_CONFIGURATION
+	{ group: "group2", format: "format-2" }
 ]
 ```
  - **formats**: represents the formats to use for each locale of your application
 ```typescript
 [
-	// Formats that will be used for the "fr" locale
+	// Formats that will be used when updating to "format-1"
 	{
-		locale:  "fr",
+		format: "format-1",
+		locale: "fr",
 		momentDateFormats: {
 			parse: {
-				dateInput:  "DD.MM.YYYY",
+				dateInput: "DD.MM.YYYY",
 			},
 			display: {
-				dateInput:  "DD.MM.YYYY",
-				monthYearLabel:  "MMM.YYYY",
-				dateA11yLabel:  "DD.MM.YYYY",
-				monthYearA11yLabel:  "MMM.YYYY",
+				dateInput: "DD.MM.YYYY",
+				monthYearLabel: "MMM.YYYY",
+				dateA11yLabel: "DD.MM.YYYY",
+				monthYearA11yLabel: "MMM.YYYY",
 			}
 		}
 	}, 
-	// Formats that will be used for the "en" locale
+	// Formats that will be used when updating to "format-2"
 	{
-		locale:  "en",
+		format: "format-2",
+		locale: "en",
 		momentDateFormats: {
 			parse: {
-				dateInput:  "YYYY-MM-DD",
+				dateInput: "YYYY-MM-DD",
 			},
 			display: {
-				dateInput:  "YYYY-MM-DD",
-				monthYearLabel:  "MMM/YYYY",
-				dateA11yLabel:  "YYYY-MM-DD",
-				monthYearA11yLabel:  "MMM/YYYY",
+				dateInput: "YYYY-MM-DD",
+				monthYearLabel: "MMM/YYYY",
+				dateA11yLabel: "YYYY-MM-DD",
+				monthYearA11yLabel: "MMM/YYYY",
 			}
 		}
 	}
@@ -116,31 +118,33 @@ NGX_GAEWYNN_DATEPICKER_CONFIGURATION consists of two properties:
 An example of a whole configuration will then be as follow:
 ```typescript
 export  const  GaewynnDatePickerConfiguration: NgxGaewynnDatePickerConfiguration= {
-	initials: [{ group:  "group1", locale:  "fr" }, { group:  "group2", locale:  "en" }],
+	initials: [{ group: "group1", format: "format-1" }, { group: "group2", format: "format-2" }],
 	formats: [{
-		locale:  "fr",
+		format: "format-1",
+		locale: "fr",
 		momentDateFormats: {
 			parse: {
-				dateInput:  "DD.MM.YYYY",
+				dateInput: "DD.MM.YYYY",
 			},
 			display: {
-				dateInput:  "DD.MM.YYYY",
-				monthYearLabel:  "MMM.YYYY",
-				dateA11yLabel:  "DD.MM.YYYY",
-				monthYearA11yLabel:  "MMM.YYYY",
+				dateInput: "DD.MM.YYYY",
+				monthYearLabel: "MMM.YYYY",
+				dateA11yLabel: "DD.MM.YYYY",
+				monthYearA11yLabel: "MMM.YYYY",
 			}
 		}
 	}, {
-		locale:  "en",
+		format: "format-2",
+		locale: "en",
 		momentDateFormats: {
 			parse: {
-				dateInput:  "YYYY-MM-DD",
+				dateInput: "YYYY-MM-DD",
 			},
 			display: {
-				dateInput:  "YYYY-MM-DD",
-				monthYearLabel:  "MMM/YYYY",
-				dateA11yLabel:  "YYYY-MM-DD",
-				monthYearA11yLabel:  "MMM/YYYY",
+				dateInput: "YYYY-MM-DD",
+				monthYearLabel: "MMM/YYYY",
+				dateA11yLabel: "YYYY-MM-DD",
+				monthYearA11yLabel: "MMM/YYYY",
 			}
 		}
 	}]
@@ -232,9 +236,9 @@ export class AppComponent implements OnInit {
 
 	public updateFormats(): void {
 
-		// This will use the formats linked to the "en" locale in your 
+		// This will apply the format named "format-2" in your 
 		// NGX_GAEWYNN_DATEPICKER_CONFIGURATION on all datepickers binded to "group1"
-		this._ngxGaewynnDatePickerService.updateFormats("group1", "en");
+		this._ngxGaewynnDatePickerService.updateFormats("format-2", "group1");
 	}
 }
 ```

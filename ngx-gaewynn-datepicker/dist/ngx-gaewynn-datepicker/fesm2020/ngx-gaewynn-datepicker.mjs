@@ -10,27 +10,44 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, MAT_MOMENT_DATE_FOR
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+/**
+ * InjectionToken for gaewynn-datepicker that can be used to configure the format used by each datepicker.
+ * @see {@link INgxGaewynnDatePickerConfiguration}
+ */
 const NGX_GAEWYNN_DATEPICKER_CONFIGURATION = new InjectionToken('NGX_GAEWYNN_DATEPICKER_CONFIGURATION', undefined);
-class NgxGaewynnDatePickerConfiguration {
-    constructor(initials, formats) {
-        this.initials = initials;
-        this.formats = formats;
-    }
-}
 class NgxGaewynnDatePickerService {
+    /**
+     * @internal
+     */
     constructor(_configuration) {
         this._configuration = _configuration;
+        /**
+         * Dispatches the new configuration when a format update is requested using @see {@link updateFormat}
+         * @internal
+         */
         this.configuration$ = new Subject();
         this._datePickerConfiguration = JSON.parse(JSON.stringify(_configuration));
     }
+    /**
+     * Initializes all datepickers with the configuration provided in {@link NGX_GAEWYNN_DATEPICKER_CONFIGURATION}
+     * @remarks this function should be called in each component using <ngx-gaewynn-datepicker> or <mgx-gaewynn-date-range-picker> during ngOnInit
+     * @public
+     */
     init() {
         this.configuration$.next(this._datePickerConfiguration);
     }
-    updateFormats(group, locale) {
+    /**
+     * Updates the given group of datepickers to the specified format (@see {@link INgxGaewynnDatePickerConfiguration})
+     *
+     * @param format Date formats to appliy
+     * @param group The name of a group of datepickers on which apply the specified format
+     * @public
+     */
+    updateFormat(format, group) {
         for (let index = 0; index < this._datePickerConfiguration.initials.length; index++) {
             const element = this._datePickerConfiguration.initials[index];
             if (element.group === group)
-                element.locale = locale;
+                element.format = format;
         }
         this.init();
     }
@@ -42,7 +59,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.4", ngImpor
             args: [{
                     providedIn: 'root'
                 }]
-        }], ctorParameters: function () { return [{ type: NgxGaewynnDatePickerConfiguration, decorators: [{
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
                     type: Inject,
                     args: [NGX_GAEWYNN_DATEPICKER_CONFIGURATION]
                 }] }]; } });
@@ -85,7 +102,7 @@ class NgxGaewynnDatePickerComponent {
         for (let index = 0; index < this._configuration.initials.length; index++) {
             const link = this._configuration.initials[index];
             if (this.group === link.group) {
-                this._formats = this._configuration.formats.filter(e => e.locale === this._configuration.initials.filter(value => value.group === this.group)[0].locale)[0];
+                this._formats = this._configuration.formats.filter(e => e.format === this._configuration.initials.filter(value => value.group === this.group)[0].format)[0];
                 ;
                 this._updateInputDateFormats();
             }
@@ -197,7 +214,7 @@ class NgxGaewynnDateRangePickerComponent {
         for (let index = 0; index < this._configuration.initials.length; index++) {
             const link = this._configuration.initials[index];
             if (this.group === link.group) {
-                this._formats = this._configuration.formats.filter(e => e.locale === this._configuration.initials.filter(value => value.group === this.group)[0].locale)[0];
+                this._formats = this._configuration.formats.filter(e => e.format === this._configuration.initials.filter(value => value.group === this.group)[0].format)[0];
                 ;
                 this._updateInputDateFormats();
             }
@@ -282,6 +299,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "15.0.4", ngImpor
  * Generated bundle index. Do not edit.
  */
 
-export { NGX_GAEWYNN_DATEPICKER_CONFIGURATION, NgxGaewynnDatePickerComponent, NgxGaewynnDatePickerConfiguration, NgxGaewynnDatePickerModule, NgxGaewynnDatePickerService, NgxGaewynnDateRangePickerComponent, NgxGaewynnDateRangePickerModule };
+export { NGX_GAEWYNN_DATEPICKER_CONFIGURATION, NgxGaewynnDatePickerComponent, NgxGaewynnDatePickerModule, NgxGaewynnDatePickerService, NgxGaewynnDateRangePickerComponent, NgxGaewynnDateRangePickerModule };
 //# sourceMappingURL=ngx-gaewynn-datepicker.mjs.map
 //# sourceMappingURL=ngx-gaewynn-datepicker.mjs.map
