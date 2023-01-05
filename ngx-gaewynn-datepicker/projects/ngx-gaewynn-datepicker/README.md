@@ -20,8 +20,8 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
  - [Installation](#installation)
  - [What's in?](#whatsin)
  - [Usage](#usage)
-    - [DatePicker](#usage_datepicker)
-    - [DateRangePicker](#usage_daterangepicker)
+    - [Basic usage](#usage_basic)
+    - [Advanced](#usage_advanced)
  - [Versioning](#versioning)
  - [Creator](#creator)
  - [Ask Me](#ask_me)
@@ -62,7 +62,7 @@ Using angular-cli:
 |--|--|
 |NgxGaewynnDatePickerModule|The module handling DatePickers. To import in each module using the component|
 |NgxGaewynnDateRangePickerModule|The module handling DateRangePickers. To import in each module using the component|
-|NgxGaewynnDatePickerService|A service allowing to update the date pickers formats|
+|NgxGaewynnDatePickerService|A service allowing to manage the date pickers formats and the configuration|
 |NGX_GAEWYNN_DATEPICKER_CONFIGURATION|A token providing your formats configuration|
 
 NGX_GAEWYNN_DATEPICKER_CONFIGURATION consists of two properties:
@@ -156,6 +156,8 @@ export  const  GaewynnDatePickerConfiguration: NgxGaewynnDatePickerConfiguration
 
 **It relies on ReactiveForms, so needs to be included in a FormGroup**
 
+### <a name="usage_basic"></a> Basic usage
+
 1. Inject the NgxGaewynnDatePickerModule (and/or the NgxGaewynnDateRangePickerModule) in each modules using the component and define a configuration for your datepickers (see [What's in?](#whatsin)). This configuration will be provided using the  **NGX_GAEWYNN_DATEPICKER_CONFIGURATION** token in your AppModule
 ```typescript
 // ...  
@@ -242,6 +244,8 @@ export class AppComponent implements OnInit {
 	}
 }
 ```
+### <a name="usage_advanced"></a> Advanced usage
+In more complex scenarios, it could happen that using the NGX_GAEWYNN_DATEPICKER_CONFIGURATION at the application startup as a provider is not a solution. In such cases, you can initialize the configuration programmatically using the **NgxGaewynnDatePickerService** and the functions "**initConfiguration()**" and "**addFormat()**".
 
 ## <a name="creator"></a> Versioning
 ngx-gaewynn-datepicker will be maintained under the Semantic Versioning guidelines. Releases will be numbered with the following format:

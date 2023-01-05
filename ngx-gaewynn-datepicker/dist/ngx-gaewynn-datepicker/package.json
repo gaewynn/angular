@@ -1,6 +1,6 @@
 {
   "name": "ngx-gaewynn-datepicker",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A simple wrapper around the Material Angular Datepicker allowing to update the date format at runtime",
   "author": "Arnaud Fischer",
   "repository": {

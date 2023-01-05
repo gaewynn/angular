@@ -69,6 +69,7 @@ export class NgxGaewynnDatePickerService {
 
   /**
    * Dispatches the new configuration when a format update is requested using @see {@link updateFormat}
+   * 
    * @internal
    */
   public configuration$: Subject<INgxGaewynnDatePickerConfiguration> = new Subject<INgxGaewynnDatePickerConfiguration>();
@@ -79,12 +80,25 @@ export class NgxGaewynnDatePickerService {
    * @internal
    */
   constructor(@Inject(NGX_GAEWYNN_DATEPICKER_CONFIGURATION) private _configuration: INgxGaewynnDatePickerConfiguration) {
-    this._datePickerConfiguration = JSON.parse(JSON.stringify(_configuration));
+    this.initConfiguration(_configuration);
+  }
+
+  /**
+   * Initializes and replaces the configuration provided by @see {@link NGX_GAEWYNN_DATEPICKER_CONFIGURATION}
+   * 
+   * @param configuration The new configuration to apply
+   * @remarks Should only be use in replacment of the @see {@link NGX_GAEWYNN_DATEPICKER_CONFIGURATION} and during the initialization process of the application
+   * 
+   * @public
+   */
+   public initConfiguration(configuration: INgxGaewynnDatePickerConfiguration): void {
+    this._datePickerConfiguration = JSON.parse(JSON.stringify(configuration));
   }
 
   /**
    * Initializes all datepickers with the configuration provided in {@link NGX_GAEWYNN_DATEPICKER_CONFIGURATION}
    * @remarks this function should be called in each component using <ngx-gaewynn-datepicker> or <mgx-gaewynn-date-range-picker> during ngOnInit
+   * 
    * @public
    */
   public init(): void {
@@ -96,6 +110,7 @@ export class NgxGaewynnDatePickerService {
    * 
    * @param format Date formats to appliy
    * @param group The name of a group of datepickers on which apply the specified format
+   * 
    * @public
    */
   public updateFormat(format: string, group: string): void {
@@ -108,5 +123,29 @@ export class NgxGaewynnDatePickerService {
     }
 
     this.init();
+  }
+
+  /**
+   * Adds a new format to the available ones
+   * 
+   * @param format The description of the new format
+   * @param group The group of datepickers to which the format will be linked
+   * 
+   * @remarks the given format will not be applied instantly to the group. To update the format, call {@link updateFormat}
+   * @remarks if a format with the same name already exists, it will be replaced by the new one
+   * 
+   * @public
+   */
+  public addFormat(format: INgxGaewynnDatePickerFormats, group: string): void {
+
+    if (!this._datePickerConfiguration.initials.some(e => e.group === group))
+      this._datePickerConfiguration.initials.push({ format: format.format, group: group });
+
+    const existingFormatIndex = this._datePickerConfiguration.formats.findIndex(e => e.format === format.format);
+    if (existingFormatIndex >= 0) {
+      this._datePickerConfiguration.formats[existingFormatIndex] = format;
+    } else {
+      this._datePickerConfiguration.formats.push(format);
+    }
   }
 }
