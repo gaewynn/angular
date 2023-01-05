@@ -38,7 +38,7 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
 ### <a name="features_whatsnext"></a> What's next?
 * If you find it useful, [just ask](https://github.com/gaewynn/angular/issues) ;)
 ## <a name="demo"></a> Demo
-[NgxGaewynnDatePicker demo](https://stackblitz.com/edit/geawynn-datepicker)
+[NgxGaewynnDatePicker demo](https://stackblitz.com/edit/ngx-geawynn-datepicker)
 ## <a name="installation"></a> Installation
 ngx-gaewynn-datepicker is available via **npm** and **yarn**
 
@@ -75,7 +75,7 @@ NGX_GAEWYNN_DATEPICKER_CONFIGURATION consists of two properties:
  - **formats**: represents the formats to use for each locale of your application
 ```typescript
 [
-	//	Formats that will be used for the "fr" locale
+	// Formats that will be used for the "fr" locale
 	{
 		locale:  "fr",
 		momentDateFormats: {
@@ -90,7 +90,7 @@ NGX_GAEWYNN_DATEPICKER_CONFIGURATION consists of two properties:
 			}
 		}
 	}, 
-	//	Formats that will be used for the "en" locale
+	// Formats that will be used for the "en" locale
 	{
 		locale:  "en",
 		momentDateFormats: {
@@ -149,19 +149,19 @@ export  const  GaewynnDatePickerConfiguration: NgxGaewynnDatePickerConfiguration
 
 1. Inject the NgxGaewynnDatePickerModule (and/or the NgxGaewynnDateRangePickerModule) in each modules using the component and define a configuration for your datepickers (see [What's in?](#whatsin)). This configuration will be provided using the  **NGX_GAEWYNN_DATEPICKER_CONFIGURATION** token in your AppModule
 ```typescript
-//...  
+// ...  
 import { NgxGaewynnDatePickerModule, NgxGaewynnDateRangePickerModule, NGX_GAEWYNN_DATEPICKER_CONFIGURATION } from  'NgxGaewynnDatePicker';
         
 @NgModule({      
 	imports: [
-		//...     		
+		// ...     		
 		NgxGaewynnDatePickerModule,
 		NgxGaewynnDateRangePickerModule
 	],
 	providers: [
 		// ...
-		//	GaewynnDatePickerConfiguration is the configuration as described
-		//	You can use "useFactory" or "useClass" to provide the configuration
+		// GaewynnDatePickerConfiguration is the configuration as described
+		// You can use "useFactory" or "useClass" to provide the configuration
 		{ provide: NGX_GAEWYNN_DATEPICKER_CONFIGURATION, useValue: GaewynnDatePickerConfiguration}
 	]
 })

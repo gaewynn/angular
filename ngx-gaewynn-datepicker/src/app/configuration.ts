@@ -1,4 +1,4 @@
-import { NgxGaewynnDatePickerConfiguration } from "projects/ngx-gaewynn-datepicker/src/public-api";
+import { NgxGaewynnDatePickerConfiguration } from "NgxGaewynnDatePicker";
 
 export const GaewynnDatePickerConfiguration: NgxGaewynnDatePickerConfiguration = {
     initials: [{ group: "group1", locale: "fr" }, { group: "group2", locale: "en" }],
