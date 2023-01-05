@@ -1,7 +1,7 @@
 
 
 An Angular Material Component wrapping the Angular Material Datepicker and allowing 
-* to update the date formats **at runtime and instantly** (see [this issue](https://github.com/angular/components/issues/8355))
+* to update the date formats **at runtime and instantly** (see [this issue](https://github.com/angular/components/issues/8355) and [this issue](https://github.com/angular/components/issues/12035))
 * to use different formats for each DatePicker
 <h1 align="center">NgxGaewynnDatePicker</h1>
 
