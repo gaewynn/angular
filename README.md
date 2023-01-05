@@ -1,10 +1,15 @@
 
 
-An Angular Material Component wrapping the Angular Material Datepicker and allowing to update the date formats at runtime (see https://github.com/angular/components/issues/8355)
+An Angular Material Component wrapping the Angular Material Datepicker and allowing 
+* to update the date formats **at runtime and instantly** (see [this issue](https://github.com/angular/components/issues/8355))
+* to use different formats for each DatePicker
 <h1 align="center">NgxGaewynnDatePicker</h1>
 
 [![Support - Angular 15+ (Reactive Forms)](https://img.shields.io/badge/Support-Angular_15%2B_(Reactive_Forms)-007EC6)](https://www.npmjs.com/package/gw-date-picker)
  [![Request - on github](https://img.shields.io/badge/Request-on_github-2ea44f)](https://github.com/gaewynn/angular)
+## Disclaimer
+*This component relies on a hack consisting of the modification of a private field within the Angular Material DatePicker component. **Be aware** that a breaking change could happen on any future update from the Angular Material team*
+
 ## Table of contents
 
  - [Browser support](#browser_support)
@@ -246,7 +251,9 @@ For more information on SemVer, please visit  [http://semver.org](http://semver.
  - [@LinkedIn](https://www.linkedin.com/in/arnaud-fischer-6a629951)
 
 ## <a name="credits"></a> Credits
-* Inspired by [mohamedelshorbagy](https://github.com/mohamedelshorbagy) on [github](https://github.com/angular/components/issues/8355)
+* Inspired by [marcgrabow](https://github.com/marcgrabow) for his "[dirty hack](https://github.com/angular/components/issues/8355#issuecomment-376783293) to change the display dateInput dateformat", but that works for now :smile:
+* Inspired by [mohamedelshorbagy](https://github.com/mohamedelshorbagy) on usage of zonejs in his [comment](https://github.com/angular/components/issues/8355#issuecomment-671993601)
+
 ### <a name="license"></a> License
 ngx-gaewynn-datepicker is **MIT licensed**.
 
