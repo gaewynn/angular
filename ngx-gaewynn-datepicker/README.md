@@ -35,7 +35,7 @@ An Angular Material Component wrapping the Angular Material Datepicker and allow
 
 ## <a name="features"></a> Features
 ### <a name="features_now"></a> Now:
- - **Angular 15** Support
+ - **Angular 18** Support
  - All features from the native [Angular Material DatePicker](https://material.angular.io/components/datepicker/overview).....**and one more**
  - Update your DatePicker date formats at runtime (**including the calendar popup labels**)
  - Support **only MomentDateAdapter**
